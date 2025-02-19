@@ -1,0 +1,94 @@
+
+<section>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row gap-3">
+      <div class="w-full md:w-1/2 lg:w-1/3">
+        @if (mealDateils) {
+        <h1 class="text-5xl font-semibold mb-4 md:mb-4 font-Pacifico">
+          {{ mealDateils.strMeal.split(" ", 1).join(" ") }}
+        </h1>
+        <div class="grid grid-cols md:grid-cols">
+          <div>
+            <img
+              [src]="mealDateils.strMealThumb"
+              class="w-full rounded-4 mb-8"
+              [alt]="mealDateils.strMeal"
+            />
+            <ul class="flex gap-4 justify-center">
+              <li class="bg-red-600 text-white py-2 px-4 rounded-lg">
+                <a
+                  target="_blank"
+                  [href]="mealDateils.strYoutube"
+                  class="flex gap-2 justify-center items-center"
+                >
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 576 512"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
+                    ></path>
+                  </svg>
+                  youtube
+                </a>
+              </li>
+              <li class="bg-[#21BA75] text-white py-2 px-4 rounded-lg">
+                <a
+                  target="_blank"
+                  href="https://www.bbcgoodfood.com/recipes/simple-sushi"
+                  class="flex gap-2 justify-center items-center"
+                >
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    version="1.1"
+                    viewBox="0 0 17 17"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g></g>
+                    <path
+                      d="M8.516 0c-4.687 0-8.5 3.813-8.5 8.5s3.813 8.5 8.5 8.5 8.5-3.813 8.5-8.5-3.814-8.5-8.5-8.5zM1.041 9h2.937c0.044 1.024 0.211 2.031 0.513 3h-2.603c-0.481-0.906-0.776-1.923-0.847-3zM3.978 8h-2.937c0.071-1.077 0.366-2.094 0.847-3h2.6c-0.301 0.969-0.467 1.976-0.51 3z"
+                    ></path>
+                  </svg>
+                  source
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="w-full md:w-1/2 lg:w-1/3 md:pt-12 md:mt-4">
+        @if (mealDateils) {
+        <p class="font-Pacifico text-sm leading-relaxed">
+          {{ mealDateils.strInstructions }}
+        </p>
+        }
+      </div>
+      <div class="w-full lg:w-1/3 p-4">
+        <div class="bg-white rounded-2xl p-4 shadow-lg">
+          <h3 class="text-2xl font-semibold mb-4 border-b-4 p-2">
+            Ingredients
+          </h3>
+          <div class="space-y-2">
+            @for (item of getIngredients(mealDateils); track $index) {
+            <div class="flex justify-between p-2 border-b-2">
+              <span>{{ item.Ingredient }}</span
+              ><span>{{ item.measure }}</span>
+            </div>
+
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

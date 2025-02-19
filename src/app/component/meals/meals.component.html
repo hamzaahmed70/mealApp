@@ -1,0 +1,101 @@
+<h2
+  class="text-4xl font-bold bg-gradient-to-r from-primary fw-bold via-[#ca1023c4] to-[#c90519] bg-clip-text text-transparent"
+>
+  Learn, Cook, Eat Your Food
+</h2>
+
+<div class="sm:hidden mt-8">
+  <label for="tabs" class="sr-only">Select a category</label>
+  <select
+    id="tabs"
+    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    (change)="navigateToCategory($event)"
+  >
+    @if (categorie) {
+    <option
+      routerLink="/category/all"
+      routerLinkActive="bg-black text-white"
+      value="all"
+    >
+      All
+    </option>
+    @for (ca of categorie; track $index) {
+    <ng-container *ngFor="let ca of categorie">
+      <option
+        [routerLink]="['/category', ca.strCategory]"
+        routerLinkActive="bg-black text-white"
+        [value]="ca.strCategory"
+      >
+        {{ ca.strCategory }}
+      </option>
+    </ng-container>
+    } }
+  </select>
+</div>
+
+<ul class="sm:flex hidden gap-2 mt-7 flex-wrap">
+  @if (categorie) {
+  <li
+    routerLink="/category/all"
+    routerLinkActive="bg-black text-white"
+    class="inline-block px-4 py-2 catLink border-gray-400 border transition-all hover:shadow-xl shadow duration-300 rounded-full hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+  >
+    All
+  </li>
+
+  @for (cate of categorie; track $index) {
+  <li
+    [routerLink]="['/category', cate.strCategory]"
+    routerLinkActive="bg-black text-white"
+    class="inline-block px-4 py-2 catLink border-gray-400 border transition-all hover:shadow-xl shadow duration-300 rounded-full hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+  >
+    {{ cate.strCategory }}
+  </li>
+
+  } }
+</ul>
+<div class="container">
+  <div class="row">
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      @if (meals != undefined) { @for (meal of meals; track $index) {
+      <div
+        class="meal group text-center bg-white rounded-3xl my-6 hover:scale-105 transition-all"
+      >
+        <img
+          [src]="meal.strMealThumb"
+          class="w-3/4 mx-auto -translate-y-5 rounded-full group-hover:rotate-[360deg] duration-700 transition-all rounded-full drop-shadow-xl -translate-y-20 shadow-2xl"
+          alt=""
+        />
+        <h4 class="font-semibold font-Pacifico tracking-wider text-xl">
+          {{ meal.strMeal.split(" ", 2).join(" ") }}
+        </h4>
+        @if (meal.strArea) {
+        <h5 class="flex justify-center items-center text-emerald-600 pt-1">
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM4 12c0-.899.156-1.762.431-2.569L6 11l2 2v2l2 2 1 1v1.931C7.061 19.436 4 16.072 4 12zm14.33 4.873C17.677 16.347 16.687 16 16 16v-1a2 2 0 0 0-2-2h-4v-3a2 2 0 0 0 2-2V7h1a2 2 0 0 0 2-2v-.411C17.928 5.778 20 8.65 20 12a7.947 7.947 0 0 1-1.67 4.873z"
+            ></path></svg
+          >{{ meal.strArea }}
+        </h5>
+        }
+
+        <button
+          [routerLink]="['/mealdetails', meal.idMeal]"
+          type="button"
+          class="text-white bg-gradient-to-r mt-4 bg-[#059669] hover:bg-emerald-600 font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 px-8 py-2 rounded-full"
+        >
+          View Recipe
+        </button>
+      </div>
+      } }
+    </div>
+  </div>
+</div>
